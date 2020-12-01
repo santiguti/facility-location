@@ -20,7 +20,7 @@ public class ListCustomer {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public ArrayList<Customer> getCenters() {
+	public ArrayList<Customer> getCustomers() {
 		return (ArrayList<Customer>) _customers.clone();
 	}
 	

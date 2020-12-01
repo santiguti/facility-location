@@ -2,39 +2,29 @@ package logic;
 
 
 public class Customer {
-	private String name;
-	private double latitude;
-	private double longitude;
+	private String _name;
+	private double _latitude;
+	private double _longitude;
 	
 	public Customer(String name, double latitude, double longitude) {
-		this.name = name;
-		this.latitude = latitude;
-		this.longitude = longitude;
+		_name = name;
+		_latitude = latitude;
+		_longitude = longitude;
 	}
 
 	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
+		return _name;
 	}
 
 	public double getLatitude() {
-		return latitude;
-	}
-
-	public void setLatitude(double latitude) {
-		this.latitude = latitude;
+		return _latitude;
 	}
 
 	public double getLongitude() {
-		return longitude;
+		return _longitude;
 	}
 
-	public void setLongitude(double longitude) {
-		this.longitude = longitude;
-	}
+
 		
 	
 }

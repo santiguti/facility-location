@@ -18,5 +18,10 @@ public class Solution {
 		return _centers.size();	
 	}
 	
+	@SuppressWarnings("unchecked")
+	public ArrayList<DistributionCenter> getListCenters() {
+		return (ArrayList<DistributionCenter>) _centers.clone();
+	}
+	
 	
 }

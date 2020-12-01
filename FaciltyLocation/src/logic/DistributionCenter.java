@@ -2,49 +2,42 @@ package logic;
 
 
 public class DistributionCenter {
-	private String idLocal;
-	private double latitude;
-	private double longitude;
-	private double totalCost;
-	
+	private String _idLocal;
+	private double _latitude;
+	private double _longitude;
+	private double _totalCost;
+
 	public DistributionCenter(String idLocal, double latitude, double longitude, double totalCost) {
-		this.idLocal = idLocal;
-		this.latitude = latitude;
-		this.longitude = longitude;
-		this.totalCost=totalCost;
+		_idLocal = idLocal;
+		_latitude = latitude;
+		_longitude = longitude;
+		_totalCost=totalCost;
 	}
-	
-
+	public void assignTotalCost(ListCustomer custumers) {
+			for(Customer customer : custumers.getCustomers()) {
+				int distance= Haversine.calculateDistance(getLongitude(),getLatitude(),
+						customer.getLongitude(), customer.getLatitude());
+			setTotalCost(getTotalCost()+distance);
+		}
+	}
 	public String getIdLocal() {
-		return idLocal;
-	}
-
-	public void setIdLocal(String idLocal) {
-		this.idLocal = idLocal;
+		return _idLocal;
 	}
 
 	public double getLatitude() {
-		return latitude;
-	}
-
-	public void setLatitude(double latitude) {
-		this.latitude = latitude;
+		return _latitude;
 	}
 
 	public double getLongitude() {
-		return longitude;
-	}
-
-	public void setLongitude(double longitude) {
-		this.longitude = longitude;
+		return _longitude;
 	}
 
 	public double getTotalCost() {
-		return totalCost;
+		return _totalCost;
 	}
 
 	public void setTotalCost(double totalCost) {
-		this.totalCost = totalCost;
+		_totalCost = totalCost;
 	}
-	
+
 }

@@ -2,7 +2,7 @@ package logic;
 
 public class Haversine {
 	
-	 public static int calculateDistance(double lon1, double lat1,double lon2, double lat2) {
+	 public static int calculateDistance(double lon1, double lat1 ,double lon2, double lat2) {
 
 			 double earthRadius = 6371; // km
 
