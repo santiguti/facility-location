@@ -1,0 +1,46 @@
+{
+  "_centers": [
+    {
+      "_idLocal": "Local1",
+      "_latitude": -34.5222325,
+      "_longitude": -58.7009527,
+      "_totalCost": 0
+    },
+    {
+      "_idLocal": "Local2",
+      "_latitude": -34.525685,
+      "_longitude": -58.736136,
+      "_totalCost": 0
+    },
+    {
+      "_idLocal": "Local3",
+      "_latitude": -34.551848,
+      "_longitude": -58.690279,
+      "_totalCost": 0
+    },
+    {
+      "_idLocal": "Local4",
+      "_latitude": -34.504476,
+      "_longitude": -58.659699,
+      "_totalCost": 0
+    },
+    {
+      "_idLocal": "Local5",
+      "_latitude": -34.474245,
+      "_longitude": -58.655236,
+      "_totalCost": 0
+    },
+    {
+      "_idLocal": "Local6",
+      "_latitude": -34.47346,
+      "_longitude": -58.681386,
+      "_totalCost": 0
+    },
+    {
+      "_idLocal": "Local7",
+      "_latitude": -34.592245,
+      "_longitude": -58.623833,
+      "_totalCost": 0
+    }
+  ]
+}

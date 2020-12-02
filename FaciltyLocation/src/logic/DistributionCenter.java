@@ -5,14 +5,14 @@ public class DistributionCenter {
 	private String _idLocal;
 	private double _latitude;
 	private double _longitude;
-	private double _totalCost;
+	private int _totalCost;
 
-	public DistributionCenter(String idLocal, double latitude, double longitude, double totalCost) {
+	public DistributionCenter(String idLocal, double latitude, double longitude) {
 		_idLocal = idLocal;
 		_latitude = latitude;
 		_longitude = longitude;
-		_totalCost=totalCost;
 	}
+	
 	public void assignTotalCost(ListCustomer custumers) {
 			for(Customer customer : custumers.getCustomers()) {
 				int distance= Haversine.calculateDistance(getLongitude(),getLatitude(),
@@ -32,11 +32,11 @@ public class DistributionCenter {
 		return _longitude;
 	}
 
-	public double getTotalCost() {
+	public int getTotalCost() {
 		return _totalCost;
 	}
 
-	public void setTotalCost(double totalCost) {
+	public void setTotalCost(int totalCost) {
 		_totalCost = totalCost;
 	}
 

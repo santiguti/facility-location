@@ -1,7 +1,13 @@
 package logic;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 public class ListDistributionCenter {
 
@@ -12,16 +18,15 @@ public class ListDistributionCenter {
 	}
 
 	public void addDistributionCenter(String idLocal, double latitude,
-			double longitude,double totalCost) {
-		_centers.add(new DistributionCenter(idLocal, latitude, longitude, totalCost));	
+			double longitude) {
+		_centers.add(new DistributionCenter(idLocal, latitude, longitude));	
 	}
 
 	//	asignar costo total de atender a todos los clientes a cada centro de distribucion
 	//  este metodo no estoy muy segura de donde iria
-	public void assignTotalCost(ListCustomer custumers) {
-		for(DistributionCenter center : _centers) {
-			center.assignTotalCost(custumers);
-		}
+	public void calculateTotalCost(ListCustomer customers) {
+		for(DistributionCenter center : _centers) 
+			center.assignTotalCost(customers);	
 	}
 
 	public int size() {
@@ -30,6 +35,40 @@ public class ListDistributionCenter {
 	@SuppressWarnings("unchecked")
 	public ArrayList<DistributionCenter> getCenters() {
 		return (ArrayList<DistributionCenter>) _centers.clone();
+	}
+	
+	//metodos JSON
+	public String generateJSONPretty() {
+		Gson gson=new GsonBuilder().setPrettyPrinting().create();
+		String json= gson.toJson(this);
+
+		return json;
+	}
+
+	public void saveJSON(String jsonParaGuardar,String archivoDestino) {
+		try {
+			FileWriter writer=new FileWriter(archivoDestino);
+			writer.write(jsonParaGuardar);
+			writer.close();
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public static ListDistributionCenter readJSON(String archivo) {
+
+		Gson gson=new Gson();
+		ListDistributionCenter ret=null;
+
+		try {
+			BufferedReader br= new BufferedReader(new FileReader(archivo));
+			ret=gson.fromJson(br, ListDistributionCenter.class);
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return ret;
 	}
 
 }

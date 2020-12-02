@@ -1,0 +1,44 @@
+{
+  "_customers": [
+    {
+      "_latitude": -34.520514,
+      "_longitude": -58.679575
+    },
+    {
+      "_latitude": -34.526697,
+      "_longitude": -58.706885
+    },
+    {
+      "_latitude": -34.539007,
+      "_longitude": -58.700938
+    },
+    {
+      "_latitude": -34.51822,
+      "_longitude": -58.710681
+    },
+    {
+      "_latitude": -34.511366,
+      "_longitude": -58.688722
+    },
+    {
+      "_latitude": -34.518164,
+      "_longitude": -58.659785
+    },
+    {
+      "_latitude": -34.555415,
+      "_longitude": -58.733772
+    },
+    {
+      "_latitude": -34.515648,
+      "_longitude": -58.76
+    },
+    {
+      "_latitude": -34.558363,
+      "_longitude": -58.691645
+    },
+    {
+      "_latitude": -34.50301,
+      "_longitude": -58.633109
+    }
+  ]
+}
