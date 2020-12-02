@@ -1,4 +1,4 @@
-package logic;
+package logic.data;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -8,6 +8,8 @@ import java.util.ArrayList;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+
+import logic.data.Customer;
 
 public class ListCustomer {
 	ArrayList<Customer> _customers;

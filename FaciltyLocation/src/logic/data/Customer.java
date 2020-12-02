@@ -1,4 +1,4 @@
-package logic;
+package logic.data;
 
 
 public class Customer {

@@ -2,6 +2,8 @@ package logic;
 
 import java.util.ArrayList;
 
+import logic.data.DistributionCenter;
+
 
 public class Solution {
 	//esta seria la solucion final que se mostraria

@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
+import logic.data.DistributionCenter;
+import logic.data.ListDistributionCenter;
+
 
 public class Solver {
 	//clase encargada de resolver el algoritmo goloso
@@ -18,7 +21,10 @@ public class Solver {
 	}
 
 	public Solution solve(int k) {
-		Solution ret = new Solution();
+		if( k >_centers.size())
+			throw new IllegalArgumentException("la cantidad supera los locales");
+		
+		Solution ret =new Solution();
 		for(DistributionCenter center: orderedCenters()) {
 			if( ret.size() <k )//si no se pasa de los k centros posibles a abrir lo agrego como solucion
 				ret.addCenter(center);
