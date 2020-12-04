@@ -6,7 +6,7 @@ import org.junit.Test;
 import logic.data.DistributionCenter;
 import logic.data.ListCustomer;
 
-public class DistributionCenterTest {
+public class AssignTotalCostTest {
 
 	@Test
 	public void  calculateTotalCostTest() {
