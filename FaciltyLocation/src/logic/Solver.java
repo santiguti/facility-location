@@ -21,7 +21,7 @@ public class Solver {
 	}
 
 	public Solution solve(int k) {
-		if( k >_centers.size())
+		if( k >_centers.size() || k < 1)
 			throw new IllegalArgumentException("la cantidad supera los locales");
 		
 		Solution ret =new Solution();

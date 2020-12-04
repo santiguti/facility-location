@@ -23,6 +23,10 @@ public class ListCustomer {
 	public int size() {
 		return _customers.size();	
 	}
+	
+	public Customer getCustomer(int c) {
+		return _customers.get(c);
+	}
 
 	@SuppressWarnings("unchecked")
 	public ArrayList<Customer> getCustomers() {

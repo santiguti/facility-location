@@ -22,11 +22,13 @@ public class ListDistributionCenter {
 		_centers.add(new DistributionCenter(idLocal, latitude, longitude));	
 	}
 
-	//	asignar costo total de atender a todos los clientes a cada centro de distribucion
-	//  este metodo no estoy muy segura de donde iria
 	public void calculateTotalCost(ListCustomer customers) {
 		for(DistributionCenter center : _centers) 
 			center.assignTotalCost(customers);	
+	}
+	
+	public DistributionCenter getCenter(int c) {
+		return _centers.get(c);	
 	}
 
 	public int size() {

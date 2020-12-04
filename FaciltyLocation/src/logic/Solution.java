@@ -16,6 +16,11 @@ public class Solution {
 	public void addCenter(DistributionCenter center) {
 		_centers.add(center);
 	}
+	
+	public DistributionCenter getCenter(int c) {
+		return _centers.get(c);	
+	}
+	
 	public int size() {
 		return _centers.size();	
 	}

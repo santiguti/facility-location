@@ -13,25 +13,14 @@ import logic.Solver;
 public class SolverTest {
 	ListCustomer customers;
 	ListDistributionCenter centers;
-	
+
 	@Before
 	public void initialize() {
 		customers= ListCustomer.readJSON("ListCustomer.JSON");
-		
+
 		centers= ListDistributionCenter.readJSON("ListDistributionCenters.JSON");
-		
+
 		centers.calculateTotalCost(customers);
- 		
-	}
-
-	@Test (expected = IllegalArgumentException.class)
-	public void solverByCostTest() {
-		
-		Solver solver= new Solver(centers, (uno, otro) -> uno.getTotalCost() - otro.getTotalCost());
-		Solution solution =solver.solve(10);
-
-		assertEquals(solution.getListCenters().get(0).getIdLocal(), "Local1");
-		assertEquals(solution.getListCenters().get(1).getIdLocal(), "Local3");
 
 	}
 	
@@ -40,8 +29,20 @@ public class SolverTest {
 		Solver solver= new Solver(centers, (uno, otro) -> uno.getTotalCost() - otro.getTotalCost());
 		Solution solution =solver.solve(2);
 
-		assertEquals(solution.getListCenters().get(0).getIdLocal(), "Local1");
-		assertEquals(solution.getListCenters().get(1).getIdLocal(), "Local3");
+		assertEquals(solution.getCenter(0).getIdLocal(), "Local1");
+		assertEquals(solution.getCenter(1).getIdLocal(), "Local3");
+	}
+	
+	@Test (expected = IllegalArgumentException.class)
+	public void solverByCostExceededTest() {	
+		Solver solver= new Solver(centers, (uno, otro) -> uno.getTotalCost() - otro.getTotalCost());
+		Solution solution =solver.solve(10);
+	}
+
+	@Test (expected = IllegalArgumentException.class)
+	public void solverByCosLessTest() {
+		Solver solver= new Solver(centers, (uno, otro) -> uno.getTotalCost() - otro.getTotalCost());
+		Solution solution =solver.solve(0);
 	}
 
 

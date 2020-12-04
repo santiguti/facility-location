@@ -3,6 +3,7 @@ package logic.data;
 public class ManejoDeArchivos {
 	
 	public static void main(String[] args) {
+		
 		ListDistributionCenter centers= new ListDistributionCenter();
 		centers.addDistributionCenter("Local1", -34.5222325,-58.7009527);
 		centers.addDistributionCenter("Local2", -34.525685, -58.736136);
