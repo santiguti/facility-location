@@ -9,6 +9,7 @@ import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
 import javax.swing.JTable;
@@ -135,6 +136,25 @@ public class Screen extends JFrame implements ActionListener {
 	public void actionPerformed(ActionEvent event) {
 		Object source = event.getSource();
 		//Aca se hacen los if(source == boton) entonces layout.show(panel, "nombreDeOtroPanel")
+		if(source == menuToMap)
+			layout.show(panel, "Map");
+		else if (source == mapToMenu)
+			layout.show(panel, "Menu");
+		else if (source == addClient) {
+			if(latitudeClient.getText().isEmpty() || longitudeClient.getText().isEmpty())
+				JOptionPane.showMessageDialog(null, "Verifique que la latitud/longitud del cliente sea correcta");
+			else {
+				clients.addCustomer(Double.parseDouble(latitudeClient.getText()), Double.parseDouble(longitudeClient.getText()));
+			}
+			
+		}
+		else if (source == addCenter) {
+			if (centerID.getText().isEmpty() ||latitudeCenter.getText().isEmpty() || longitudeCenter.getText().isEmpty())
+				JOptionPane.showMessageDialog(null, "Verifique que el ID o latitud/longitud del local sea correcta");
+			else {
+				centers.addDistributionCenter(centerID.getText(), Double.parseDouble(latitudeCenter.getText()), Double.parseDouble(longitudeCenter.getText()));
+			}
+		}
 	}
 	
 	public static void main(String[] args) {
