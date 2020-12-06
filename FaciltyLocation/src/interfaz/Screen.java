@@ -80,12 +80,19 @@ public class Screen extends JFrame implements ActionListener {
 		clientModel.setValueAt("Longitude", 0, 1);
 		
 		menu.add(addClient);
-		addClient.setBounds(520, 25, 150, 25);
+		addClient.setBounds(598, 96, 150, 25);
+		
 		menu.add(removeClient);
-		removeClient.setBounds(520, 75, 150, 25);
+		removeClient.setBounds(520, 250, 150, 25);
+		
 		menu.add(toBeRemovedClient);
-		toBeRemovedClient.setBounds(680, 75, 40, 25);
-		toBeRemovedClient.setModel(new SpinnerNumberModel(1, 1, clients.size(), 1));
+		toBeRemovedClient.setBounds(680, 250, 40, 25);
+		toBeRemovedClient.setModel(new SpinnerNumberModel(0, 0, clients.size(), 1));
+		
+		menu.add(latitudeClient);
+		latitudeClient.setBounds(520, 44, 150, 25);
+		menu.add(longitudeClient);
+		longitudeClient.setBounds(680, 44, 150, 25);
 		
 		menu.add(centersList);
 		centersList.setBounds(10, 380, 500, 260);
