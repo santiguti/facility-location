@@ -6,9 +6,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.DefaultListModel;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JSpinner;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -16,6 +18,8 @@ import logic.data.Customer;
 import logic.data.DistributionCenter;
 import logic.data.ListCustomer;
 import logic.data.ListDistributionCenter;
+import javax.swing.JTextField;
+import javax.swing.SpinnerNumberModel;
 
 public class Screen extends JFrame implements ActionListener {
 	private static final long serialVersionUID = 1L;
@@ -34,11 +38,24 @@ public class Screen extends JFrame implements ActionListener {
 	JTable clientsList = new JTable(clientModel);
 	JTable centersList = new JTable(centersModel);
 	
+	JButton addClient = new JButton("Add");
+	JButton removeClient = new JButton("Remove");
+	JSpinner toBeRemovedClient = new JSpinner();
+	JTextField latitudeClient = new JTextField();
+	JTextField longitudeClient = new JTextField();
+	
+	JButton addCenter = new JButton("Add");
+	JButton removeCenter = new JButton("Remove");
+	JSpinner toBeRemovedCenter = new JSpinner();
+	JTextField centerID = new JTextField();
+	JTextField latitudeCenter = new JTextField();
+	JTextField longitudeCenter = new JTextField();
+	
 	public Screen(int width, int height) {
 		panel.setLayout(layout);
 		addButtons();
 		
-		setSize(800, 600);
+		setSize(1024, 768);
 		setResizable(false);
 		setLocationRelativeTo(null);
 		setVisible(true);
@@ -58,12 +75,20 @@ public class Screen extends JFrame implements ActionListener {
 		
 		//Luego agrego labels, buttons, list a los diferentes layouts y les setteo font, posicion, etc
 		menu.add(clientsList);
-		clientsList.setBounds(10, 20, 245, 445);
+		clientsList.setBounds(10, 20, 500, 260);
 		clientModel.setValueAt("Latitude", 0, 0);
 		clientModel.setValueAt("Longitude", 0, 1);
 		
+		menu.add(addClient);
+		addClient.setBounds(520, 25, 150, 25);
+		menu.add(removeClient);
+		removeClient.setBounds(520, 75, 150, 25);
+		menu.add(toBeRemovedClient);
+		toBeRemovedClient.setBounds(680, 75, 40, 25);
+		toBeRemovedClient.setModel(new SpinnerNumberModel(1, 1, clients.size(), 1));
+		
 		menu.add(centersList);
-		centersList.setBounds(539, 20, 245, 445);
+		centersList.setBounds(10, 380, 500, 260);
 		centersModel.setValueAt("Center ID", 0, 0);
 		centersModel.setValueAt("Latitude", 0, 1);
 		centersModel.setValueAt("Longitude", 0, 2);
