@@ -30,6 +30,7 @@ public class Screen extends JFrame implements ActionListener {
 	CardLayout layout = new CardLayout();
 	JPanel panel = new JPanel();
 	JPanel menu = new JPanel();
+	JPanel map = new JPanel();
 	
 	ListCustomer clients = new ListCustomer();
 	ListDistributionCenter centers = new ListDistributionCenter();
@@ -51,6 +52,9 @@ public class Screen extends JFrame implements ActionListener {
 	JTextField latitudeCenter = new JTextField();
 	JTextField longitudeCenter = new JTextField();
 	
+	JButton menuToMap = new JButton("\u2192");
+	JButton mapToMenu = new JButton("\u2190");
+	
 	public Screen(int width, int height) {
 		panel.setLayout(layout);
 		addButtons();
@@ -69,6 +73,10 @@ public class Screen extends JFrame implements ActionListener {
 		menu.setLayout(null);
 		menu.setBackground(Color.GRAY);
 		panel.add(menu, "Menu");
+		
+		map.setLayout(null);
+		map.setBackground(Color.black);
+		panel.add(map, "Map");
 		
 		getContentPane().add(panel);
 		layout.show(panel, "Menu");
@@ -116,6 +124,12 @@ public class Screen extends JFrame implements ActionListener {
 		latitudeCenter.setBounds(680, 446, 150, 25);
 		menu.add(longitudeCenter);
 		longitudeCenter.setBounds(840, 446, 150, 25);
+		
+		menu.add(menuToMap);
+		menuToMap.setBounds(880, 675, 95, 35);
+		
+		map.add(mapToMenu);
+		mapToMenu.setBounds(10, 10, 50, 20);
 	}
 	
 	public void actionPerformed(ActionEvent event) {
