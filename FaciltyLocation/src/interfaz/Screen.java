@@ -75,30 +75,47 @@ public class Screen extends JFrame implements ActionListener {
 		
 		//Luego agrego labels, buttons, list a los diferentes layouts y les setteo font, posicion, etc
 		menu.add(clientsList);
-		clientsList.setBounds(10, 20, 500, 260);
+		clientsList.setBounds(10, 59, 500, 260);
 		clientModel.setValueAt("Latitude", 0, 0);
 		clientModel.setValueAt("Longitude", 0, 1);
 		
 		menu.add(addClient);
-		addClient.setBounds(598, 96, 150, 25);
+		addClient.setBounds(680, 171, 150, 25);
 		
 		menu.add(removeClient);
-		removeClient.setBounds(520, 250, 150, 25);
+		removeClient.setBounds(520, 280, 150, 25);
 		
 		menu.add(toBeRemovedClient);
-		toBeRemovedClient.setBounds(680, 250, 40, 25);
+		toBeRemovedClient.setBounds(680, 280, 40, 25);
 		toBeRemovedClient.setModel(new SpinnerNumberModel(0, 0, clients.size(), 1));
 		
 		menu.add(latitudeClient);
-		latitudeClient.setBounds(520, 44, 150, 25);
+		latitudeClient.setBounds(596, 123, 150, 25);
 		menu.add(longitudeClient);
-		longitudeClient.setBounds(680, 44, 150, 25);
+		longitudeClient.setBounds(756, 123, 150, 25);
 		
 		menu.add(centersList);
-		centersList.setBounds(10, 380, 500, 260);
+		centersList.setBounds(10, 409, 500, 260);
 		centersModel.setValueAt("Center ID", 0, 0);
 		centersModel.setValueAt("Latitude", 0, 1);
 		centersModel.setValueAt("Longitude", 0, 2);
+		
+		menu.add(addCenter);
+		addCenter.setBounds(680, 494, 150, 25);
+		
+		menu.add(removeCenter);
+		removeCenter.setBounds(520, 610, 150, 25);
+		
+		menu.add(toBeRemovedCenter);
+		toBeRemovedCenter.setBounds(680, 610, 40, 25);
+		toBeRemovedCenter.setModel(new SpinnerNumberModel(0, 0, centers.size(), 1));
+		
+		menu.add(centerID);
+		centerID.setBounds(520, 446, 150, 25);
+		menu.add(latitudeCenter);
+		latitudeCenter.setBounds(680, 446, 150, 25);
+		menu.add(longitudeCenter);
+		longitudeCenter.setBounds(840, 446, 150, 25);
 	}
 	
 	public void actionPerformed(ActionEvent event) {
