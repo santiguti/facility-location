@@ -14,42 +14,42 @@ public class ListDistributionCenter {
 	ArrayList<DistributionCenter> _centers;
 
 	public ListDistributionCenter() {
-		this._centers =new ArrayList<DistributionCenter>();
+		this._centers = new ArrayList<DistributionCenter>();
 	}
 
-	public void addDistributionCenter(String idLocal, double latitude,
-			double longitude) {
-		_centers.add(new DistributionCenter(idLocal, latitude, longitude));	
+	public void addDistributionCenter(String idLocal, double latitude, double longitude) {
+		_centers.add(new DistributionCenter(idLocal, latitude, longitude));
 	}
 
 	public void calculateTotalCost(ListCustomer customers) {
-		for(DistributionCenter center : _centers) 
-			center.assignTotalCost(customers);	
+		for (DistributionCenter center : _centers)
+			center.assignTotalCost(customers);
 	}
-	
+
 	public DistributionCenter getCenter(int c) {
-		return _centers.get(c);	
+		return _centers.get(c);
 	}
 
 	public int size() {
-		return _centers.size();	
+		return _centers.size();
 	}
+
 	@SuppressWarnings("unchecked")
 	public ArrayList<DistributionCenter> getCenters() {
 		return (ArrayList<DistributionCenter>) _centers.clone();
 	}
-	
-	//metodos JSON
+
+	// metodos JSON
 	public String generateJSONPretty() {
-		Gson gson=new GsonBuilder().setPrettyPrinting().create();
-		String json= gson.toJson(this);
+		Gson gson = new GsonBuilder().setPrettyPrinting().create();
+		String json = gson.toJson(this);
 
 		return json;
 	}
 
-	public void saveJSON(String jsonParaGuardar,String archivoDestino) {
+	public void saveJSON(String jsonParaGuardar, String archivoDestino) {
 		try {
-			FileWriter writer=new FileWriter(archivoDestino);
+			FileWriter writer = new FileWriter(archivoDestino);
 			writer.write(jsonParaGuardar);
 			writer.close();
 
@@ -59,13 +59,12 @@ public class ListDistributionCenter {
 	}
 
 	public static ListDistributionCenter readJSON(String archivo) {
-
-		Gson gson=new Gson();
-		ListDistributionCenter ret=null;
+		Gson gson = new Gson();
+		ListDistributionCenter ret = null;
 
 		try {
-			BufferedReader br= new BufferedReader(new FileReader(archivo));
-			ret=gson.fromJson(br, ListDistributionCenter.class);
+			BufferedReader br = new BufferedReader(new FileReader(archivo));
+			ret = gson.fromJson(br, ListDistributionCenter.class);
 
 		} catch (IOException e) {
 			e.printStackTrace();

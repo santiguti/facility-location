@@ -2,7 +2,6 @@ package logic.data;
 
 import logic.Haversine;
 
-
 public class DistributionCenter {
 	private String _idLocal;
 	private double _latitude;
@@ -14,15 +13,14 @@ public class DistributionCenter {
 		_latitude = latitude;
 		_longitude = longitude;
 	}
-	
+
 	public void assignTotalCost(ListCustomer customers) {
-			for(Customer customer : customers.getCustomers()) {
-				int distance= Haversine.calculateDistance(getLongitude(),getLatitude(),
-						customer.getLongitude(), customer.getLatitude());
-			setTotalCost(getTotalCost()+distance);
+		for (Customer customer : customers.getCustomers()) {
+			int distance = Haversine.calculateDistance(getLongitude(), getLatitude(), customer.getLongitude(), customer.getLatitude());
+			setTotalCost(getTotalCost() + distance);
 		}
 	}
-	
+
 	public String getIdLocal() {
 		return _idLocal;
 	}

@@ -26,29 +26,29 @@ import javax.swing.JOptionPane;
 
 public class Screen extends JFrame {
 	private static final long serialVersionUID = 1L;
-	
+
 	int width, height;
-	
-	//Hacer todos los news de aca para abajo
+
+	// Hacer todos los news de aca para abajo
 	CardLayout layout = new CardLayout();
 	JPanel panel = new JPanel();
 	JPanel menu = new JPanel();
-	
+
 	JMapViewer map = new JMapViewer();
 	Coordinate coordinate = new Coordinate(-34.518164, -58.659785);
-	
+
 	ListCustomer customers = new ListCustomer();
 	ListDistributionCenter centers = new ListDistributionCenter();
-	
+
 	JMenuBar menuBar = new JMenuBar();
 	JMenu menuList = new JMenu("Acciones");
 	JMenuItem loadData = new JMenuItem("Cargar datos");
 	JMenuItem runSolver = new JMenuItem("Buscar solución");
-	
+
 	public Screen(int width, int height) {
 		panel.setLayout(layout);
 		addButtons();
-		
+
 		setSize(1024, 768);
 		setResizable(false);
 		setLocationRelativeTo(null);
@@ -57,26 +57,27 @@ public class Screen extends JFrame {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		requestFocus();
 	}
-	
+
 	private void addButtons() {
-		//Setteo layouts a null, les agrego background
+		// Setteo layouts a null, les agrego background
 		menu.setLayout(null);
 		menu.setBackground(Color.GRAY);
 		panel.add(menu, "Menu");
 
 		getContentPane().add(panel);
 		layout.show(panel, "Menu");
-		
-		//Luego agrego labels, buttons, list a los diferentes layouts y les setteo font, posicion, etc
+
+		// Luego agrego labels, buttons, list a los diferentes layouts y les setteo
+		// font, posicion, etc
 		menu.add(map);
 		map.setBounds(0, 29, 1008, 698);
 		map.setDisplayPosition(coordinate, 12);
 		map.setZoomControlsVisible(false);
-		
+
 		menu.add(menuBar);
 		menuBar.setBounds(0, 0, 1018, 30);
 		menuBar.add(menuList);
-		
+
 		menuList.add(loadData);
 		loadData.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -85,31 +86,31 @@ public class Screen extends JFrame {
 				map.setMapMarkerList(loadMarkers(customers.getCustomers(), centers.getCenters()));
 			}
 		});
-		
+
 		menuList.add(runSolver);
 		runSolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (customers.size() <= 0 || centers.size() <= 0)
 					JOptionPane.showMessageDialog(null, "Primero debe cargar los datos");
 				else {
-				centers.calculateTotalCost(customers);
-				Solver solver = new Solver(centers, (uno, otro) -> uno.getTotalCost() - otro.getTotalCost());
-				int quantityCenters = Integer.parseInt(JOptionPane.showInputDialog("Ingrese cantidad de locales a abrir"));
-				while (quantityCenters <= 0 || quantityCenters > centers.size()) {
-					JOptionPane.showMessageDialog(null, "Ingrese una cantidad de locales menor a " +centers.size()+ " y mayor a cero");
-					quantityCenters = Integer.parseInt(JOptionPane.showInputDialog("Ingrese cantidad de locales a abrir"));
-				}
-				Solution solution = new Solution();
-				solution = solver.solve(quantityCenters);
-				map.setMapMarkerList(loadMarkers(customers.getCustomers(), solution.getListCenters()));
-				String solutionJSON = solution.generateJSONPretty();
-				solution.saveJSON(solutionJSON, "toBeOpenedCenters.JSON");
-				JOptionPane.showMessageDialog(null, "Lista de locales a abrir guardada en archivo");
+					centers.calculateTotalCost(customers);
+					Solver solver = new Solver(centers, (uno, otro) -> uno.getTotalCost() - otro.getTotalCost());
+					int quantityCenters = Integer.parseInt(JOptionPane.showInputDialog("Ingrese cantidad de locales a abrir"));
+					while (quantityCenters <= 0 || quantityCenters > centers.size()) {
+						JOptionPane.showMessageDialog(null, "Ingrese una cantidad de locales menor a " + centers.size() + " y mayor a cero");
+						quantityCenters = Integer.parseInt(JOptionPane.showInputDialog("Ingrese cantidad de locales a abrir"));
+					}
+					Solution solution = new Solution();
+					solution = solver.solve(quantityCenters);
+					map.setMapMarkerList(loadMarkers(customers.getCustomers(), solution.getListCenters()));
+					String solutionJSON = solution.generateJSONPretty();
+					solution.saveJSON(solutionJSON, "toBeOpenedCenters.JSON");
+					JOptionPane.showMessageDialog(null, "Lista de locales a abrir guardada en archivo");
 				}
 			}
 		});
 	}
-	
+
 	private ArrayList<MapMarker> loadMarkers(ArrayList<Customer> customers, ArrayList<DistributionCenter> centers) {
 		int counter = 1;
 		ArrayList<MapMarker> mapMarkerList = new ArrayList<MapMarker>();
@@ -127,10 +128,10 @@ public class Screen extends JFrame {
 			markerCenter.getStyle().setColor(Color.yellow);
 			mapMarkerList.add(markerCenter);
 			counter++;
-			}
+		}
 		return mapMarkerList;
 	}
-		
+
 	public static void main(String[] args) {
 		Screen s = new Screen(800, 600);
 	}

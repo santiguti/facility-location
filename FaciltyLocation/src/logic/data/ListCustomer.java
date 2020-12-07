@@ -13,7 +13,7 @@ public class ListCustomer {
 	ArrayList<Customer> _customers;
 
 	public ListCustomer() {
-		this._customers =new ArrayList<Customer>();
+		this._customers = new ArrayList<Customer>();
 	}
 
 	public void addCustomer(double latitude, double longitude) {
@@ -21,9 +21,9 @@ public class ListCustomer {
 	}
 
 	public int size() {
-		return _customers.size();	
+		return _customers.size();
 	}
-	
+
 	public Customer getCustomer(int c) {
 		return _customers.get(c);
 	}
@@ -33,17 +33,17 @@ public class ListCustomer {
 		return (ArrayList<Customer>) _customers.clone();
 	}
 
-	//metodos JSON
+	// metodos JSON
 	public String generateJSONPretty() {
-		Gson gson=new GsonBuilder().setPrettyPrinting().create();
-		String json= gson.toJson(this);
+		Gson gson = new GsonBuilder().setPrettyPrinting().create();
+		String json = gson.toJson(this);
 
 		return json;
 	}
 
-	public void saveJSON(String jsonParaGuardar,String archivoDestino) {
+	public void saveJSON(String jsonParaGuardar, String archivoDestino) {
 		try {
-			FileWriter writer=new FileWriter(archivoDestino);
+			FileWriter writer = new FileWriter(archivoDestino);
 			writer.write(jsonParaGuardar);
 			writer.close();
 
@@ -53,12 +53,12 @@ public class ListCustomer {
 	}
 
 	public static ListCustomer readJSON(String archivo) {
-		Gson gson=new Gson();
-		ListCustomer ret=null;
+		Gson gson = new Gson();
+		ListCustomer ret = null;
 
 		try {
-			BufferedReader br= new BufferedReader(new FileReader(archivo));
-			ret=gson.fromJson(br, ListCustomer.class);
+			BufferedReader br = new BufferedReader(new FileReader(archivo));
+			ret = gson.fromJson(br, ListCustomer.class);
 
 		} catch (IOException e) {
 			e.printStackTrace();

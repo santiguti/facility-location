@@ -16,34 +16,33 @@ public class SolverTest {
 
 	@Before
 	public void initialize() {
-		customers= ListCustomer.readJSON("ListCustomer.JSON");
+		customers = ListCustomer.readJSON("ListCustomer.JSON");
 
-		centers= ListDistributionCenter.readJSON("ListDistributionCenters.JSON");
+		centers = ListDistributionCenter.readJSON("ListDistributionCenters.JSON");
 
 		centers.calculateTotalCost(customers);
 
 	}
-	
-	@Test 
+
+	@Test
 	public void solverByCostRightTest() {
-		Solver solver= new Solver(centers, (uno, otro) -> uno.getTotalCost() - otro.getTotalCost());
-		Solution solution =solver.solve(2);
+		Solver solver = new Solver(centers, (uno, otro) -> uno.getTotalCost() - otro.getTotalCost());
+		Solution solution = solver.solve(2);
 
 		assertEquals(solution.getCenter(0).getIdLocal(), "Local1");
 		assertEquals(solution.getCenter(1).getIdLocal(), "Local3");
 	}
-	
-	@Test (expected = IllegalArgumentException.class)
-	public void solverByCostExceededTest() {	
-		Solver solver= new Solver(centers, (uno, otro) -> uno.getTotalCost() - otro.getTotalCost());
-		Solution solution =solver.solve(10);
+
+	@Test(expected = IllegalArgumentException.class)
+	public void solverByCostExceededTest() {
+		Solver solver = new Solver(centers, (uno, otro) -> uno.getTotalCost() - otro.getTotalCost());
+		Solution solution = solver.solve(10);
 	}
 
-	@Test (expected = IllegalArgumentException.class)
+	@Test(expected = IllegalArgumentException.class)
 	public void solverByCosLessTest() {
-		Solver solver= new Solver(centers, (uno, otro) -> uno.getTotalCost() - otro.getTotalCost());
-		Solution solution =solver.solve(0);
+		Solver solver = new Solver(centers, (uno, otro) -> uno.getTotalCost() - otro.getTotalCost());
+		Solution solution = solver.solve(0);
 	}
-
 
 }
