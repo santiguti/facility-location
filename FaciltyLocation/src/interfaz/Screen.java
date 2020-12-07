@@ -2,18 +2,19 @@ package interfaz;
 
 import java.awt.CardLayout;
 import java.awt.Color;
+import java.awt.List;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import org.openstreetmap.gui.jmapviewer.Coordinate;
 import org.openstreetmap.gui.jmapviewer.JMapViewer;
-import org.openstreetmap.gui.jmapviewer.Layer;
 import org.openstreetmap.gui.jmapviewer.MapMarkerDot;
 import org.openstreetmap.gui.jmapviewer.interfaces.MapMarker;
-
+import logic.Solution;
+import logic.Solver;
 import logic.data.Customer;
 import logic.data.DistributionCenter;
 import logic.data.ListCustomer;
@@ -21,6 +22,7 @@ import logic.data.ListDistributionCenter;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 
 public class Screen extends JFrame {
 	private static final long serialVersionUID = 1L;
@@ -32,14 +34,18 @@ public class Screen extends JFrame {
 	JPanel panel = new JPanel();
 	JPanel menu = new JPanel();
 	
+
+	
 	JMapViewer map = new JMapViewer();
 	Coordinate coordinate = new Coordinate(-34.518164, -58.659785);
 	
 	ListCustomer customers = new ListCustomer();
 	ListDistributionCenter centers = new ListDistributionCenter();
+	
 	JMenuBar menuBar = new JMenuBar();
 	JMenu menuList = new JMenu("Acciones");
 	JMenuItem loadData = new JMenuItem("Cargar datos");
+	JMenuItem runSolver = new JMenuItem("Buscar solución");
 	
 	public Screen(int width, int height) {
 		panel.setLayout(layout);
@@ -72,30 +78,55 @@ public class Screen extends JFrame {
 		menuBar.setBounds(0, 0, 1018, 30);
 		menuBar.add(menuList);
 		
-		menuList.setMnemonic(KeyEvent.VK_A);
 		menuList.add(loadData);
 		loadData.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				customers = ListCustomer.readJSON("ListCustomer.JSON");
 				centers = ListDistributionCenter.readJSON("ListDistributionCenters.JSON");
-				int contador = 1;
-				for (Customer customer : customers.getCustomers()) {
-					MapMarker center1 = new MapMarkerDot("Cliente " + contador, new Coordinate(customer.getLatitude(), customer.getLongitude()));
-					center1.getStyle().setBackColor(Color.blue);
-					center1.getStyle().setColor(Color.black);
-					map.addMapMarker(center1);
-					contador++;
-				}
-				contador = 1;
-				for (DistributionCenter centers : centers.getCenters()) {
-					MapMarker center1 = new MapMarkerDot("Local " + contador, new Coordinate(centers.getLatitude(), centers.getLongitude()));
-					center1.getStyle().setBackColor(Color.red);
-					center1.getStyle().setColor(Color.yellow);
-					map.addMapMarker(center1);
-					contador++;
-					}
+				map.setMapMarkerList(loadMarkers(customers.getCustomers(), centers.getCenters()));
 			}
 		});
+		
+		menuList.add(runSolver);
+		runSolver.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (customers.size() <= 0 || centers.size() <= 0 || customers == null || centers == null)
+					JOptionPane.showMessageDialog(null, "Primero debe cargar los datos");
+				else {
+				centers.calculateTotalCost(customers);
+				Solver solver = new Solver(centers, (uno, otro) -> uno.getTotalCost() - otro.getTotalCost());
+				int quantityCenters = Integer.parseInt(JOptionPane.showInputDialog("Ingrese cantidad de locales a abrir"));
+				while (quantityCenters <= 0 || quantityCenters > centers.size()) {
+					JOptionPane.showMessageDialog(null, "Ingrese una cantidad de locales menor a " +centers.size()+ " y mayor a cero");
+					quantityCenters = Integer.parseInt(JOptionPane.showInputDialog("Ingrese cantidad de locales a abrir"));
+				}
+				Solution solution = new Solution();
+				solution = solver.solve(quantityCenters);
+				map.setMapMarkerList(loadMarkers(customers.getCustomers(), solution.getListCenters()));
+				}
+			}
+		});
+	}
+	
+	private ArrayList<MapMarker> loadMarkers(ArrayList<Customer> customers, ArrayList<DistributionCenter> centers) {
+		int counter = 1;
+		ArrayList<MapMarker> mapMarkerList = new ArrayList<MapMarker>();
+		for (Customer customer : customers) {
+			MapMarker markerCustomer = new MapMarkerDot("Cliente " + counter, new Coordinate(customer.getLatitude(), customer.getLongitude()));
+			markerCustomer.getStyle().setBackColor(Color.blue);
+			markerCustomer.getStyle().setColor(Color.black);
+			mapMarkerList.add(markerCustomer);
+			counter++;
+		}
+		counter = 1;
+		for (DistributionCenter center : centers) {
+			MapMarker markerCenter = new MapMarkerDot("Local " + counter, new Coordinate(center.getLatitude(), center.getLongitude()));
+			markerCenter.getStyle().setBackColor(Color.red);
+			markerCenter.getStyle().setColor(Color.yellow);
+			mapMarkerList.add(markerCenter);
+			counter++;
+			}
+		return mapMarkerList;
 	}
 		
 	public static void main(String[] args) {

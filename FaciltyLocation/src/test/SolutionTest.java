@@ -18,7 +18,7 @@ public class SolutionTest {
 		solution.addCenter(new DistributionCenter("Local6", -34.555415, -58.733772));
 		solution.addCenter(new DistributionCenter("Local9", -34.503010, -58.633109));
 		
-		assertEquals(3, solution.size());		
+		assertEquals(3, solution.size());
 	}
 	
 	@Test 
