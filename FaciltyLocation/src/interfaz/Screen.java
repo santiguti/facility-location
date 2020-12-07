@@ -131,7 +131,7 @@ public class Screen extends JFrame {
 				else {
 					StringBuilder message = new StringBuilder("El promedio de distancia de cada local con los "+customers.size()+" clientes es: \n");
 					for (DistributionCenter center : solution.getListCenters()) {
-						String aux = ("-" + center.getIdLocal() + ": " + center.getTotalCost()/customers.getCustomers().size() + "\n");
+						String aux = ("-" + center.getIdLocal() + ": " + center.getTotalCost()/customers.getCustomers().size() + " metros \n");
 						message.append(aux);
 					}
 					JOptionPane.showMessageDialog(null, message);

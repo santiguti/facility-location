@@ -11,6 +11,12 @@
       "_latitude": -34.551848,
       "_longitude": -58.690279,
       "_totalCost": 41716
+    },
+    {
+      "_idLocal": "Local2",
+      "_latitude": -34.525685,
+      "_longitude": -58.736136,
+      "_totalCost": 46583
     }
   ]
 }
