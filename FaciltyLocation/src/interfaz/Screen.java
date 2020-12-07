@@ -26,6 +26,8 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
+import java.awt.Font;
+import java.awt.Toolkit;
 
 public class Screen extends JFrame {
 	private static final long serialVersionUID = 1L;
@@ -50,9 +52,11 @@ public class Screen extends JFrame {
 	JMenuItem close =new JMenuItem("Cerrar");
 
 	public Screen(int width, int height) {
+	
 		panel.setLayout(layout);
 		addButtons();
-
+		
+		setIconImage(Toolkit.getDefaultToolkit().getImage(Screen.class.getResource("/image/globo.png")));
 		setSize(1024, 768);
 		setResizable(false);
 		setLocationRelativeTo(null);
@@ -80,6 +84,7 @@ public class Screen extends JFrame {
 
 		menu.add(menuBar);
 		menuBar.setBounds(0, 0, 1018, 30);
+		menuList.setFont(new Font("Berlin Sans FB", Font.PLAIN, 17));
 		
 		menuBar.add(menuList);
 		menuList.add(loadData);
