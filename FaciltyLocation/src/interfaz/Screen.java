@@ -40,7 +40,7 @@ public class Screen extends JFrame {
 	JPanel menu = new JPanel();
 
 	JMapViewer map = new JMapViewer();
-	Coordinate coordinate = new Coordinate(-34.528079, -58.646740);
+	Coordinate startingCoordinate = new Coordinate(-34.528079, -58.646740);
 
 	ListCustomer customers = new ListCustomer();
 	ListDistributionCenter centers = new ListDistributionCenter();
@@ -50,6 +50,8 @@ public class Screen extends JFrame {
 	JMenuItem loadData = new JMenuItem("Cargar datos");
 	JMenuItem runSolver = new JMenuItem("Buscar solución");
 	JMenuItem close =new JMenuItem("Cerrar");
+	
+	Font menuListFont = new Font("Berlin Sans FB", Font.PLAIN, 17);
 
 	public Screen(int width, int height) {
 	
@@ -79,33 +81,18 @@ public class Screen extends JFrame {
 		// font, posicion, etc
 		menu.add(map);
 		map.setBounds(0, 29, 1008, 698);
-		map.setDisplayPosition(coordinate, 12);
+		map.setDisplayPosition(startingCoordinate, 12);
 		map.setZoomControlsVisible(false);
 
 		menu.add(menuBar);
 		menuBar.setBounds(0, 0, 1018, 30);
-		menuList.setFont(new Font("Berlin Sans FB", Font.PLAIN, 17));
 		
 		menuBar.add(menuList);
+		menuList.setFont(menuListFont);
+		
 		menuList.add(loadData);
+		
 		menuList.add(runSolver);
-		menuList.add(close);
-		
-		close.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				 Window w = SwingUtilities.getWindowAncestor(panel);
-			       w.setVisible(false);
-			}
-		});
-		
-		loadData.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				customers = ListCustomer.readJSON("ListCustomer.JSON");
-				centers = ListDistributionCenter.readJSON("ListDistributionCenters.JSON");
-				map.setMapMarkerList(loadMarkers(customers.getCustomers(), centers.getCenters()));
-			}
-		});
-		
 		runSolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (customers.size() <= 0 || centers.size() <= 0)
@@ -126,7 +113,23 @@ public class Screen extends JFrame {
 					JOptionPane.showMessageDialog(null, "Lista de locales a abrir guardada en archivo");
 				}
 			}
-		});	
+		});
+		
+		menuList.add(close);
+		close.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				 Window w = SwingUtilities.getWindowAncestor(panel);
+			       w.setVisible(false);
+			}
+		});
+		
+		loadData.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				customers = ListCustomer.readJSON("ListCustomer.JSON");
+				centers = ListDistributionCenter.readJSON("ListDistributionCenters.JSON");
+				map.setMapMarkerList(loadMarkers(customers.getCustomers(), centers.getCenters()));
+			}
+		});
 	}
 
 	private ArrayList<MapMarker> loadMarkers(ArrayList<Customer> customers, ArrayList<DistributionCenter> centers) {
@@ -139,6 +142,7 @@ public class Screen extends JFrame {
 			mapMarkerList.add(markerCustomer);
 			counter++;
 		}
+		
 		counter = 1;
 		for (DistributionCenter center : centers) {
 			MapMarker markerCenter = new MapMarkerDot(center.getIdLocal(), new Coordinate(center.getLatitude(), center.getLongitude()));
