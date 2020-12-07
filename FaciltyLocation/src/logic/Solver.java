@@ -13,6 +13,7 @@ public class Solver {
 	private ListDistributionCenter _centers;
 
 	// hay q pasarle una lista de centros de distribucion que ya tenga el costoTotal asignado
+	
 	public Solver(ListDistributionCenter listCenters, Comparator<DistributionCenter> comparador) {
 		_comparador = comparador;
 		_centers = listCenters;

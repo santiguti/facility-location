@@ -11,36 +11,6 @@
       "_latitude": -34.551848,
       "_longitude": -58.690279,
       "_totalCost": 41716
-    },
-    {
-      "_idLocal": "Local2",
-      "_latitude": -34.525685,
-      "_longitude": -58.736136,
-      "_totalCost": 46583
-    },
-    {
-      "_idLocal": "Local4",
-      "_latitude": -34.504476,
-      "_longitude": -58.659699,
-      "_totalCost": 49337
-    },
-    {
-      "_idLocal": "Local6",
-      "_latitude": -34.47346,
-      "_longitude": -58.681386,
-      "_totalCost": 68269
-    },
-    {
-      "_idLocal": "Local5",
-      "_latitude": -34.474245,
-      "_longitude": -58.655236,
-      "_totalCost": 74449
-    },
-    {
-      "_idLocal": "Local7",
-      "_latitude": -34.592245,
-      "_longitude": -58.623833,
-      "_totalCost": 103497
     }
   ]
 }

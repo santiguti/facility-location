@@ -41,15 +41,17 @@ public class Screen extends JFrame {
 
 	JMapViewer map = new JMapViewer();
 	Coordinate startingCoordinate = new Coordinate(-34.528079, -58.646740);
-
+	
 	ListCustomer customers = new ListCustomer();
 	ListDistributionCenter centers = new ListDistributionCenter();
+	Solution solution = new Solution();
 
 	JMenuBar menuBar = new JMenuBar();
 	JMenu menuList = new JMenu("Acciones");
 	JMenuItem loadData = new JMenuItem("Cargar datos");
 	JMenuItem runSolver = new JMenuItem("Buscar solución");
-	JMenuItem close =new JMenuItem("Cerrar");
+	JMenuItem statisticsSol = new JMenuItem("Estadisticas");
+	JMenuItem close = new JMenuItem("Cerrar");
 	
 	Font menuListFont = new Font("Berlin Sans FB", Font.PLAIN, 17);
 
@@ -80,7 +82,7 @@ public class Screen extends JFrame {
 		// Luego agrego labels, buttons, list a los diferentes layouts y les setteo
 		// font, posicion, etc
 		menu.add(map);
-		map.setBounds(0, 29, 1008, 698);
+		map.setBounds(0, 30, 1010, 700);
 		map.setDisplayPosition(startingCoordinate, 12);
 		map.setZoomControlsVisible(false);
 
@@ -91,6 +93,13 @@ public class Screen extends JFrame {
 		menuList.setFont(menuListFont);
 		
 		menuList.add(loadData);
+		loadData.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				customers = ListCustomer.readJSON("ListCustomer.JSON");
+				centers = ListDistributionCenter.readJSON("ListDistributionCenters.JSON");
+				map.setMapMarkerList(loadMarkers(customers.getCustomers(), centers.getCenters()));
+			}
+		});
 		
 		menuList.add(runSolver);
 		runSolver.addActionListener(new ActionListener() {
@@ -105,12 +114,27 @@ public class Screen extends JFrame {
 						JOptionPane.showMessageDialog(null, "Ingrese una cantidad de locales menor a " + centers.size() + " y mayor a cero");
 						quantityCenters = Integer.parseInt(JOptionPane.showInputDialog("Ingrese cantidad de locales a abrir"));
 					}
-					Solution solution = new Solution();
 					solution = solver.solve(quantityCenters);
 					map.setMapMarkerList(loadMarkers(customers.getCustomers(), solution.getListCenters()));
 					String solutionJSON = solution.generateJSONPretty();
 					solution.saveJSON(solutionJSON, "toBeOpenedCenters.JSON");
 					JOptionPane.showMessageDialog(null, "Lista de locales a abrir guardada en archivo");
+				}
+			}
+		});
+		
+		menuList.add(statisticsSol);
+		statisticsSol.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (solution.getListCenters().size() <= 0)
+					JOptionPane.showMessageDialog(null, "Para calcular las estadisticas primero debe existir una solución");
+				else {
+					StringBuilder message = new StringBuilder("El promedio de distancia de cada local con los "+customers.size()+" clientes es: \n");
+					for (DistributionCenter center : solution.getListCenters()) {
+						String aux = ("-" + center.getIdLocal() + ": " + center.getTotalCost()/customers.getCustomers().size() + "\n");
+						message.append(aux);
+					}
+					JOptionPane.showMessageDialog(null, message);
 				}
 			}
 		});
@@ -123,13 +147,7 @@ public class Screen extends JFrame {
 			}
 		});
 		
-		loadData.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				customers = ListCustomer.readJSON("ListCustomer.JSON");
-				centers = ListDistributionCenter.readJSON("ListDistributionCenters.JSON");
-				map.setMapMarkerList(loadMarkers(customers.getCustomers(), centers.getCenters()));
-			}
-		});
+
 	}
 
 	private ArrayList<MapMarker> loadMarkers(ArrayList<Customer> customers, ArrayList<DistributionCenter> centers) {
