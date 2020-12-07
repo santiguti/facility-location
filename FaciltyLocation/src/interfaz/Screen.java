@@ -102,6 +102,9 @@ public class Screen extends JFrame {
 				Solution solution = new Solution();
 				solution = solver.solve(quantityCenters);
 				map.setMapMarkerList(loadMarkers(customers.getCustomers(), solution.getListCenters()));
+				String solutionJSON = solution.generateJSONPretty();
+				solution.saveJSON(solutionJSON, "toBeOpenedCenters.JSON");
+				JOptionPane.showMessageDialog(null, "Lista de locales a abrir guardada en archivo");
 				}
 			}
 		});
@@ -119,7 +122,7 @@ public class Screen extends JFrame {
 		}
 		counter = 1;
 		for (DistributionCenter center : centers) {
-			MapMarker markerCenter = new MapMarkerDot("Local " + counter, new Coordinate(center.getLatitude(), center.getLongitude()));
+			MapMarker markerCenter = new MapMarkerDot(center.getIdLocal(), new Coordinate(center.getLatitude(), center.getLongitude()));
 			markerCenter.getStyle().setBackColor(Color.red);
 			markerCenter.getStyle().setColor(Color.yellow);
 			mapMarkerList.add(markerCenter);

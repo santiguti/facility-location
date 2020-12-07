@@ -1,6 +1,11 @@
 package logic;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import logic.data.DistributionCenter;
 
@@ -29,6 +34,25 @@ public class Solution {
 	@SuppressWarnings("unchecked")
 	public ArrayList<DistributionCenter> getListCenters() {
 		return (ArrayList<DistributionCenter>) _centers.clone();
+	}
+	
+	//Metodos JSON
+	public String generateJSONPretty() {
+		Gson gson=new GsonBuilder().setPrettyPrinting().create();
+		String json= gson.toJson(this);
+
+		return json;
+	}
+
+	public void saveJSON(String jsonParaGuardar,String archivoDestino) {
+		try {
+			FileWriter writer=new FileWriter(archivoDestino);
+			writer.write(jsonParaGuardar);
+			writer.close();
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	
