@@ -38,7 +38,7 @@ public class Screen extends JFrame {
 	JPanel menu = new JPanel();
 
 	JMapViewer map = new JMapViewer();
-	Coordinate coordinate = new Coordinate(-34.518164, -58.659785);
+	Coordinate coordinate = new Coordinate(-34.528079, -58.646740);
 
 	ListCustomer customers = new ListCustomer();
 	ListDistributionCenter centers = new ListDistributionCenter();
@@ -93,7 +93,6 @@ public class Screen extends JFrame {
 			}
 		});
 		
-		
 		loadData.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				customers = ListCustomer.readJSON("ListCustomer.JSON");
@@ -122,11 +121,8 @@ public class Screen extends JFrame {
 					JOptionPane.showMessageDialog(null, "Lista de locales a abrir guardada en archivo");
 				}
 			}
-		});
-		
-		
+		});	
 	}
-	
 
 	private ArrayList<MapMarker> loadMarkers(ArrayList<Customer> customers, ArrayList<DistributionCenter> centers) {
 		int counter = 1;
