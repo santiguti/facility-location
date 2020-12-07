@@ -33,12 +33,14 @@ public class SolverTest {
 		assertEquals(solution.getCenter(1).getIdLocal(), "Local3");
 	}
 
+	@SuppressWarnings("unused")
 	@Test(expected = IllegalArgumentException.class)
 	public void solverByCostExceededTest() {
 		Solver solver = new Solver(centers, (uno, otro) -> uno.getTotalCost() - otro.getTotalCost());
 		Solution solution = solver.solve(10);
 	}
-
+	
+	@SuppressWarnings("unused")
 	@Test(expected = IllegalArgumentException.class)
 	public void solverByCosLessTest() {
 		Solver solver = new Solver(centers, (uno, otro) -> uno.getTotalCost() - otro.getTotalCost());

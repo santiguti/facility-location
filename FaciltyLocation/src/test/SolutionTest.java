@@ -1,13 +1,9 @@
 package test;
 
 import static org.junit.Assert.*;
-
-import org.junit.Before;
 import org.junit.Test;
-
 import logic.Solution;
 import logic.data.DistributionCenter;
-import logic.data.ListCustomer;
 
 public class SolutionTest {
 
