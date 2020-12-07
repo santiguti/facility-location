@@ -34,8 +34,6 @@ public class Screen extends JFrame {
 	JPanel panel = new JPanel();
 	JPanel menu = new JPanel();
 	
-
-	
 	JMapViewer map = new JMapViewer();
 	Coordinate coordinate = new Coordinate(-34.518164, -58.659785);
 	
@@ -68,6 +66,7 @@ public class Screen extends JFrame {
 
 		getContentPane().add(panel);
 		layout.show(panel, "Menu");
+		
 		//Luego agrego labels, buttons, list a los diferentes layouts y les setteo font, posicion, etc
 		menu.add(map);
 		map.setBounds(0, 29, 1008, 698);
@@ -90,7 +89,7 @@ public class Screen extends JFrame {
 		menuList.add(runSolver);
 		runSolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (customers.size() <= 0 || centers.size() <= 0 || customers == null || centers == null)
+				if (customers.size() <= 0 || centers.size() <= 0)
 					JOptionPane.showMessageDialog(null, "Primero debe cargar los datos");
 				else {
 				centers.calculateTotalCost(customers);

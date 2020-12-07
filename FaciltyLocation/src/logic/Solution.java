@@ -25,9 +25,6 @@ public class Solution {
 		return _centers.size();	
 	}
 	
-	public boolean include(DistributionCenter center) {
-		return _centers.contains(center);
-	}
 	
 	@SuppressWarnings("unchecked")
 	public ArrayList<DistributionCenter> getListCenters() {
