@@ -1,0 +1,16 @@
+{
+  "_centers": [
+    {
+      "_idLocal": "Local1",
+      "_latitude": -34.5222325,
+      "_longitude": -58.7009527,
+      "_totalCost": 31906
+    },
+    {
+      "_idLocal": "Local3",
+      "_latitude": -34.551848,
+      "_longitude": -58.690279,
+      "_totalCost": 41716
+    }
+  ]
+}
