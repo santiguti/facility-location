@@ -2,13 +2,16 @@ package interfaz;
 
 import java.awt.CardLayout;
 import java.awt.Color;
-import java.awt.List;
+import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
+
 import org.openstreetmap.gui.jmapviewer.Coordinate;
 import org.openstreetmap.gui.jmapviewer.JMapViewer;
 import org.openstreetmap.gui.jmapviewer.MapMarkerDot;
@@ -44,6 +47,7 @@ public class Screen extends JFrame {
 	JMenu menuList = new JMenu("Acciones");
 	JMenuItem loadData = new JMenuItem("Cargar datos");
 	JMenuItem runSolver = new JMenuItem("Buscar solución");
+	JMenuItem close =new JMenuItem("Cerrar");
 
 	public Screen(int width, int height) {
 		panel.setLayout(layout);
@@ -76,9 +80,20 @@ public class Screen extends JFrame {
 
 		menu.add(menuBar);
 		menuBar.setBounds(0, 0, 1018, 30);
+		
 		menuBar.add(menuList);
-
 		menuList.add(loadData);
+		menuList.add(runSolver);
+		menuList.add(close);
+		
+		close.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				 Window w = SwingUtilities.getWindowAncestor(panel);
+			       w.setVisible(false);
+			}
+		});
+		
+		
 		loadData.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				customers = ListCustomer.readJSON("ListCustomer.JSON");
@@ -86,8 +101,7 @@ public class Screen extends JFrame {
 				map.setMapMarkerList(loadMarkers(customers.getCustomers(), centers.getCenters()));
 			}
 		});
-
-		menuList.add(runSolver);
+		
 		runSolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (customers.size() <= 0 || centers.size() <= 0)
@@ -109,7 +123,10 @@ public class Screen extends JFrame {
 				}
 			}
 		});
+		
+		
 	}
+	
 
 	private ArrayList<MapMarker> loadMarkers(ArrayList<Customer> customers, ArrayList<DistributionCenter> centers) {
 		int counter = 1;
@@ -132,7 +149,13 @@ public class Screen extends JFrame {
 		return mapMarkerList;
 	}
 
+	@SuppressWarnings("unused")
 	public static void main(String[] args) {
+		try {
+			UIManager.setLookAndFeel("com.jtattoo.plaf.graphite.GraphiteLookAndFeel");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		Screen s = new Screen(800, 600);
 	}
 }
