@@ -1,2 +1,3 @@
 # Facility Location. 
-TP N°3 de la materia Programación 3. El TP se basa en, dado la locación de los clientes y de diferentes lotes/locales en un area el algoritmo define cual es el lugar más cercano para la mayoria de los clientes posibles. Para calcular la distancia se utiliza Haversine y para la solución final un algoritmo goloso.
+
+Prject N°3 of the subject Programming 3. The project is based in, given the location of the clients and different lots/building in an area, the algorithm defines which is the closest place for most clients. Haversine is used to calculate the distance and a greedy algorithm for the final solution.
